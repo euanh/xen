@@ -1,10 +1,10 @@
 include $(XEN_ROOT)/tools/Rules.mk
 
 CC ?= gcc
-OCAMLOPT ?= ocamlopt
-OCAMLC ?= ocamlc
-OCAMLMKLIB ?= ocamlmklib
-OCAMLDEP ?= ocamldep
+OCAMLOPT ?= ocamlfind ocamlopt
+OCAMLC ?= ocamlfind ocamlc
+OCAMLMKLIB ?= ocamlfind ocamlmklib
+OCAMLDEP ?= ocamlfind ocamldep
 OCAMLLEX ?= ocamllex
 OCAMLYACC ?= ocamlyacc
 OCAMLFIND ?= ocamlfind

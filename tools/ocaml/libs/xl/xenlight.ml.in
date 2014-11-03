@@ -13,9 +13,11 @@
  * GNU Lesser General Public License for more details.
  *)
 
+open Sexplib.Std
+
 type ctx
-type domid = int
-type devid = int
+type domid = int with sexp
+type devid = int with sexp
 
 (* @@LIBXL_TYPES@@ *)
 

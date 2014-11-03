@@ -140,7 +140,7 @@ def gen_ocaml_keyedunions(ty, interface, indent, parent = None):
             s += "\ntype %s_%s =\n" % (nparent,f.name)
             s += "{\n"
             s += gen_struct(f.type)
-            s += "}\n"
+            s += "} with sexp\n"
 
         name = "%s__union" % ty.keyvar.name
         s += "\n"
@@ -159,7 +159,7 @@ def gen_ocaml_keyedunions(ty, interface, indent, parent = None):
             else:
                 raise NotImplementedError("Cannot handle KeyedUnion fields which are not Structs")
             
-        s += " | ".join(u) + "\n"
+        s += " | ".join(u) + " with sexp\n"
         ty.union_name = name
 
         union_type = "?%s:%s" % (munge_name(nparent), ty.keyvar.type.rawname)
@@ -179,6 +179,7 @@ def gen_ocaml_ml(ty, interface, indent=""):
         s += "type %s = \n" % ty.rawname
         for v in ty.values:
             s += "\t | %s\n" % v.rawname
+        s += "with sexp"
 
         if interface:
             s += "\nval string_of_%s : %s -> string\n" % (ty.rawname, ty.rawname)
@@ -214,7 +215,7 @@ def gen_ocaml_ml(ty, interface, indent=""):
         s += "\ttype t =\n"
         s += "\t{\n"
         s += gen_struct(ty)
-        s += "\t}\n"
+        s += "\t} with sexp\n"
 
         if ty.init_fn is not None:
             union_args = "".join([u + " -> " for u in union_types])

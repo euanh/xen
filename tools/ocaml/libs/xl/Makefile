@@ -12,7 +12,8 @@ OBJS = xenlight
 INTF = xenlight.cmi
 LIBS = xenlight.cma xenlight.cmxa
 
-OCAMLINCLUDE += -I ../xentoollog
+OCAMLINCLUDE += -I ../xentoollog -package sexplib.syntax -syntax camlp4o
+OCAMLDEPFLAGS += -package sexplib.syntax -syntax camlp4o
 
 LIBS_xenlight = $(LDLIBS_libxenlight)
 
