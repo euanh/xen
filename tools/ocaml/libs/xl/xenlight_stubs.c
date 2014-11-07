@@ -728,9 +728,6 @@ value stub_xl_device_disk_list(value ctx, value domid)
 	c_list = libxl_device_disk_list(CTX, c_domid, &nb);
 	caml_leave_blocking_section();
 
-	if (!c_list)
-		failwith_xl(ERROR_FAIL, "disk_list");
-
 	list = temp = Val_emptylist;
 	for (i = 0; i < nb; i++) {
 		list = caml_alloc_small(2, Tag_cons);
