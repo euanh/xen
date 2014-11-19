@@ -637,6 +637,7 @@ value stub_xl_device_##type##_##op(value ctx, value info, value domid,	\
 	value async, value unit)					\
 {									\
 	CAMLparam5(ctx, info, domid, async, unit);			\
+	CAMLlocal1(info_out);			\
 	libxl_device_##type c_info;					\
 	int ret, marker_var;						\
 	uint32_t c_domid = Int_val(domid);				\
@@ -649,12 +650,13 @@ value stub_xl_device_##type##_##op(value ctx, value info, value domid,	\
 	caml_leave_blocking_section();					\
 									\
 	free(ao_how);							\
+	info_out = Val_device_##type(&c_info);							\
 	libxl_device_##type##_dispose(&c_info);				\
 									\
 	if (ret != 0)							\
 		failwith_xl(ret, STRINGIFY(type) "_" STRINGIFY(op));	\
 									\
-	CAMLreturn(Val_unit);						\
+	CAMLreturn(info_out);						\
 }
 
 #define DEVICE_ADDREMOVE(type) \
