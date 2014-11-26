@@ -299,7 +299,13 @@ int libxl__domain_rename(libxl__gc *gc, uint32_t domid,
             goto x_fail;
         }
     }
-
+    
+    if (!new_name) {
+        LIBXL__LOG(ctx, LIBXL__LOG_ERROR,
+                        "new domain name must be specified");
+        goto x_fail;
+    }
+    
     if (new_name[0]) {
         /* nonempty names must be unique */
         uint32_t domid_e;
