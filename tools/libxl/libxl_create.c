@@ -27,6 +27,9 @@
 int libxl__domain_create_info_setdefault(libxl__gc *gc,
                                          libxl_domain_create_info *c_info)
 {
+    if (!c_info->name)
+        c_info->name = strdup("");
+
     if (!c_info->type)
         return ERROR_INVAL;
 
