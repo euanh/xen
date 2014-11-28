@@ -15,6 +15,12 @@ CFLAGS += -Werror -Wno-format-zero-length -Wmissing-declarations \
 	-Wno-declaration-after-statement -Wformat-nonliteral
 CFLAGS += -I. -fPIC
 
+ifeq ($(debug),y)
+# Disable optimizations and debugging information for macros
+CFLAGS += -O0 -g3
+endif
+
+
 ifeq ($(CONFIG_Linux),y)
 LIBUUID_LIBS += -luuid
 endif
